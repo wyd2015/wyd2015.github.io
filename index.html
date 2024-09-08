@@ -394,13 +394,13 @@
       
         jQuery.ajax({
           type: 'GET',
-          url: 'https://v2.jinrishici.com/sentence',
-          headers: {"X-User-Token":"+iv363z7smhK0ZpURNO24ImqJAN7aPnO"},
+          url: 'https://blog.cgio.asia/api/poetry/text',
+          headers: {"Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyODM3Njg4OH0.HEYf_yUZgIvx3k_irUK3hNLv7vFop6YWtCkwQlAvrZg"},
           dataType: 'json',
           success: function(result) {
             var apiText;
             if (result) {
-              var keys = 'data,content'.split(',');
+              var keys = 'content'.split(',');
               if (result instanceof Array) {
                 result = result[0];
               }
@@ -418,7 +418,7 @@
           },
           error: function(xhr, status, error) {
             if (error) {
-              console.error('Failed to request https://v2.jinrishici.com/sentence:', error);
+              console.error('Failed to request https://blog.cgio.asia/api/poetry/text:', error);
             }
             typing(text);
           }
