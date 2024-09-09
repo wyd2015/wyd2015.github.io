@@ -32,6 +32,7 @@ let js_snippet = `
  */
 // hexo.extend.injector.register('head_end', js_snippet, 'default')
 
+// 具体配置查看：https://hexo.fluid-dev.com/docs/advance/#hexo-%E6%B3%A8%E5%85%A5%E4%BB%A3%E7%A0%81
 hexo.extend.filter.register('theme_inject', function(injects) {
     injects.header.raw('default', js_snippet);
 });
