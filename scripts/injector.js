@@ -30,4 +30,8 @@ let js_snippet = `
  * tag: 只注入到标签页面（is_tag() 为 true 的页面）
  * 或是其他自定义 layout 名称，例如在Fluid 主题中 about 对应关于页、links 对应友联页
  */
-hexo.extend.injector.register('head_end', js_snippet, 'default')
+// hexo.extend.injector.register('head_end', js_snippet, 'default')
+
+hexo.extend.filter.register('theme_inject', function(injects) {
+    injects.header.raw('default', js_snippet);
+});
