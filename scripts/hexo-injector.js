@@ -11,6 +11,18 @@ let js_snippet = `
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3069755693602214" crossorigin="anonymous"></script>
 `
 
+let handle_relative_img_path = function(data) {
+    console.log('====== in handle_relative_img_path ======')
+    console.log(data)
+    // let reverseSource = data.source.split('').reverse().join('');
+    // let fileName = reverseSource.substring(3, reverseSource.indexOf("/")).split('').reverse().join('');
+    // let regExp = RegExp("!\\[([^\\f\\n\\r\\t\\v\\[\\]]+)\\]\\(" + fileName + '\\/([^\\\\\\/\\:\\*\\?\\"\\<\\>\\|\\,\\)]+)\\)');
+    // data.content = data.content.replace(regExp, "{%assets $2 %}"，"g")
+    // return data;
+}
+hexo.extend.filter.register('before_post_render', handle_relative_img_path, 9);
+
+
 /**
  * register 函数可接受三个参数,第一个参数是代码片段注入的位置，接受以下值：
  * head_begin: 注入在 <head> 之后（默认）
@@ -36,3 +48,5 @@ let js_snippet = `
 hexo.extend.filter.register('theme_inject', function(injects) {
     injects.header.raw('default', js_snippet);
 });
+
+
