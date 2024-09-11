@@ -27,7 +27,7 @@
 <meta property="og:description" content="1、使用草稿直接使用hexo new title_nmame的方式创建的文章，如果短时间内未完成，在执行hexo d命令后，依然会被渲染解析到public文件夹下，并随着上传到仓库后直接发布到博客中。为避免这种情况出现，可以使用草稿处理这一类的文章。 123456789# 新建草稿hexo new draft &lt;title_name&gt;# 该命令配合插件[hexo-browsersync">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-09-09T11:31:35.000Z">
-<meta property="article:modified_time" content="2024-09-09T15:14:11.543Z">
+<meta property="article:modified_time" content="2024-09-10T16:47:47.372Z">
 <meta property="article:author" content="静海潜蛟">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary_large_image">
@@ -271,7 +271,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          282 字
+          424 字
         
       </span>
     
@@ -282,7 +282,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -333,7 +333,7 @@
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-09-09T23:14:11+08:00
+                    本文最后更新于 2024-09-11T00:47:47+08:00
                   
                   
 
@@ -358,10 +358,16 @@
 <li><a target="_blank" rel="noopener" href="https://wallhaven.cc/">Wallhaven</a><iframe src="https://wallhaven.cc/" width="100%" height="300" name="topFrame" scrolling="yes" noresize="noresize" frameborder="0" id="topFrame"></iframe></li>
 <li><a target="_blank" rel="noopener" href="https://unsplash.com/">Unsplash</a><iframe src="https://unsplash.com/" width="100%" height="300" name="topFrame" scrolling="yes" noresize="noresize" frameborder="0" id="topFrame"></iframe></li>
 </ul>
+<h2 id="4、使用相对路径保存图片"><a href="#4、使用相对路径保存图片" class="headerlink" title="4、使用相对路径保存图片"></a>4、使用相对路径保存图片</h2><p>当前<code>hexo-7.3.0</code>版本内置了<code>hexo-renderer-marked</code>插件，可以方便的处理使用相对路径时，typora 与 hexo 无法同时显示图片的问题！</p>
+<h3 id="4-1、修改config-yml文件"><a href="#4-1、修改config-yml文件" class="headerlink" title="4.1、修改config.yml文件"></a>4.1、修改<code>config.yml</code>文件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 已有配置，默认值为 false，这里改为 true</span><br><span class="hljs-attr">post_asset_folder:</span> <span class="hljs-literal">true</span><br><br><span class="hljs-comment"># 需要添加的配置</span><br><span class="hljs-attr">marked:</span><br>  <span class="hljs-attr">prependRoot:</span> <span class="hljs-literal">true</span><br>  <span class="hljs-attr">postAsset:</span> <span class="hljs-literal">true</span><br></code></pre></td></tr></table></figure>
+<h3 id="4-2、通过命令创建新文件"><a href="#4-2、通过命令创建新文件" class="headerlink" title="4.2、通过命令创建新文件"></a>4.2、通过命令创建新文件</h3><p>使用下面的命令创建完成后，会自动生成一个同名的文件夹用于存放图片</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">hexo new &#x27;markdown_file_name&#x27;<br></code></pre></td></tr></table></figure>
+
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E7%A4%BE%E4%BA%A4%E9%A1%B5%E5%9B%BE%E6%A0%87">Hexo Fluid 用户手册</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.17lai.site/posts/cf0f47fd/#Markdown-%E6%8F%92%E4%BB%B6">Hexo Markdown以及各种插件功能测试</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.17lai.site/posts/92d347d6/">https://blog.17lai.site/posts/92d347d6/</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7306723921717198899">Hexo插入图片（好用的办法）</a></li>
 </ol>
 
                 
@@ -406,7 +412,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月9日</div>
+          <div>2024年9月11日</div>
         </div>
       
       
@@ -469,7 +475,7 @@
       Fluid.utils.createCssLink('https://registry.npmmirror.com/@waline/client/2.15.8/files/dist/waline.css')
       Fluid.utils.createScript('https://registry.npmmirror.com/@waline/client/2.15.8/files/dist/waline.js', function() {
         var options = Object.assign(
-          {"serverURL":"https://cgio-blog-waline-5dfon6e0q-cgios-projects.vercel.app/","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
+          {"serverURL":"https://cgio-blog-waline.vercel.app","path":"window.location.pathname","meta":["nick","mail","link"],"requiredMeta":["nick"],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","wordLimit":0,"pageSize":10},
           {
             el: '#waline',
             path: window.location.pathname

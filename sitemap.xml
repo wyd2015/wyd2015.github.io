@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.html</loc>
+    <loc>https://wyd2015.github.io/hexo%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7.html</loc>
     
     <lastmod>2024-09-10</lastmod>
     
@@ -11,9 +11,9 @@
   </url>
   
   <url>
-    <loc>https://wyd2015.github.io/hexo%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7.html</loc>
+    <loc>https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.html</loc>
     
-    <lastmod>2024-09-09</lastmod>
+    <lastmod>2024-09-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -58,7 +58,7 @@
 
   <url>
     <loc>https://wyd2015.github.io/</loc>
-    <lastmod>2024-09-10</lastmod>
+    <lastmod>2024-09-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -66,28 +66,28 @@
   
   <url>
     <loc>https://wyd2015.github.io/tags/frp/</loc>
-    <lastmod>2024-09-10</lastmod>
+    <lastmod>2024-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/https/</loc>
-    <lastmod>2024-09-10</lastmod>
+    <lastmod>2024-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</loc>
-    <lastmod>2024-09-10</lastmod>
+    <lastmod>2024-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/hexo/</loc>
-    <lastmod>2024-09-10</lastmod>
+    <lastmod>2024-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -96,7 +96,7 @@
   
   <url>
     <loc>https://wyd2015.github.io/categories/%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2024-09-10</lastmod>
+    <lastmod>2024-09-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
