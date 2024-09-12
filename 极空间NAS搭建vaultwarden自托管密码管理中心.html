@@ -19,30 +19,37 @@
   <meta name="author" content="静海潜蛟">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、实际需求自己拥有了一台极空间Z4的NAS后，在上面部署了一些服务来满足自身的生活需求：  Vaultwarden：可自托管的个人密码安全管理使用平台，支持多端同步使用，出于安全考虑，客户端需要通过 https 协议与服务端通信； Gotify：自托管的开源消多端消息接发平台，自己发布的一些服务可通过gotify-server端来向移动端实时发送通知； Joplin：自托管的开源多端同步的笔记平">
+    <meta name="description" content="需求背景常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FRP内网服务配置https">
-<meta property="og:url" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.html">
+<meta property="og:title" content="极空间NAS搭建vaultwarden自托管密码管理中心">
+<meta property="og:url" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.html">
 <meta property="og:site_name" content="静海潜蛟">
-<meta property="og:description" content="一、实际需求自己拥有了一台极空间Z4的NAS后，在上面部署了一些服务来满足自身的生活需求：  Vaultwarden：可自托管的个人密码安全管理使用平台，支持多端同步使用，出于安全考虑，客户端需要通过 https 协议与服务端通信； Gotify：自托管的开源消多端消息接发平台，自己发布的一些服务可通过gotify-server端来向移动端实时发送通知； Joplin：自托管的开源多端同步的笔记平">
+<meta property="og:description" content="需求背景常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910021943840.png">
-<meta property="og:image" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910022746382.png">
-<meta property="og:image" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910020557647.png">
-<meta property="og:image" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910020643749.png">
-<meta property="og:image" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910021020498.png">
-<meta property="article:published_time" content="2024-09-09T18:49:25.000Z">
-<meta property="article:modified_time" content="2024-09-10T14:47:52.398Z">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_1.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_2.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_3.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_4.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_5.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_6.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_7.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_8.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_9.png">
+<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_10.png">
+<meta property="article:published_time" content="2024-09-12T13:06:33.000Z">
+<meta property="article:modified_time" content="2024-09-12T14:15:58.925Z">
 <meta property="article:author" content="静海潜蛟">
-<meta property="article:tag" content="frp">
-<meta property="article:tag" content="https">
 <meta property="article:tag" content="内网穿透">
+<meta property="article:tag" content="NAS">
+<meta property="article:tag" content="极空间">
+<meta property="article:tag" content="vaultwarden">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wyd2015.github.io/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910021943840.png">
+<meta name="twitter:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png">
   
   
   
-  <title>FRP内网服务配置https - 静海潜蛟</title>
+  <title>极空间NAS搭建vaultwarden自托管密码管理中心 - 静海潜蛟</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -251,7 +258,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">FRP内网服务配置https</span>
+            <span id="subtitle">极空间NAS搭建vaultwarden自托管密码管理中心</span>
           
         </div>
 
@@ -267,8 +274,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-10 02:49" pubdate>
-          2024年9月10日 凌晨
+        <time datetime="2024-09-12 21:06" pubdate>
+          2024年9月12日 晚上
         </time>
       </span>
     
@@ -279,7 +286,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1k 字
+          996 字
         
       </span>
     
@@ -336,12 +343,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">FRP内网服务配置https</h1>
+            <h1 id="seo-header">极空间NAS搭建vaultwarden自托管密码管理中心</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-09-10T22:47:52+08:00
+                    本文最后更新于 2024-09-12T22:15:58+08:00
                   
                   
 
@@ -351,72 +358,37 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一、实际需求"><a href="#一、实际需求" class="headerlink" title="一、实际需求"></a>一、实际需求</h1><p>自己拥有了一台极空间Z4的NAS后，在上面部署了一些服务来满足自身的生活需求：</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/dani-garcia/vaultwarden">Vaultwarden</a>：可自托管的个人密码安全管理使用平台，支持多端同步使用，出于安全考虑，客户端需要通过 https 协议与服务端通信；</li>
-<li><a target="_blank" rel="noopener" href="https://gotify.net/">Gotify</a>：自托管的开源消多端消息接发平台，自己发布的一些服务可通过gotify-server端来向移动端实时发送通知；</li>
-<li><a target="_blank" rel="noopener" href="https://joplinapp.org/">Joplin</a>：自托管的开源多端同步的笔记平台；</li>
-<li><a target="_blank" rel="noopener" href="https://about.gitea.com/">Gitea</a>：自托管的开源多端同步的代码仓库平台；</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/hectorqin/reader">Reader</a>：自托管的开源阅读平台</li>
-<li>… …</li>
+                <h1 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h1><p>常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！<br>目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站注册的账号、密码，然后通过不同平台的客户端实现下次登录时自动填充密码。</p>
+<h1 id="搭建准备"><a href="#搭建准备" class="headerlink" title="搭建准备"></a>搭建准备</h1><ul>
+<li>【极空间】或其它支持Docker的服务器</li>
+<li>已申请https证书的域名</li>
 </ul>
-<p>因受限于背景移动宽带的可恶嘴脸，每月19元的IPV4，还得各种打电话改桥接，最终还要被限制80和443端口的使用，虽然可以曲线救国，通过<code>IPV6+DDNS</code>的方式来实现将内网服务转发到外网使用，但IPV6也不是免费的啊！<br>不想付费买IP，只能采用更加曲线的形式，来达到我的目的了。</p>
-<p>它那就是<code>vps+frp</code>组合技：</p>
-<ul>
-<li><p>VPS：国外服务器</p>
-<blockquote>
-<p>平时有使用谷歌的需求，就在搬瓦工上淘了性价比比较高的服务器来FxxxGW，配置虽低，但跑个代理+FRP的服务端足够了!</p>
-</blockquote>
-</li>
-<li><p>FRP：开源内网穿透神器</p>
-</li>
-<li><p>域名：国内或国外域名商购买即可</p>
-</li>
-</ul>
-<h1 id="二、服务配置"><a href="#二、服务配置" class="headerlink" title="二、服务配置"></a>二、服务配置</h1><h2 id="1-域名托管到cloudfare"><a href="#1-域名托管到cloudfare" class="headerlink" title="1. 域名托管到cloudfare"></a>1. 域名托管到<code>cloudfare</code></h2><ol>
-<li><p>注册账号</p>
-</li>
-<li><p>添加域名</p>
-</li>
-<li><p>域名服务商处配置cloufare的Nameserver</p>
-</li>
-<li><p>域名的DNS添加A记录，域名与VPS域名绑定，不用代理</p>
-<p><img src="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910021943840.png" srcset="/img/loading.gif" lazyload alt="image-20240910021943840"></p>
-</li>
-</ol>
-<h2 id="2-安装-FRPS"><a href="#2-安装-FRPS" class="headerlink" title="2. 安装 FRPS"></a>2. 安装 FRPS</h2><ol>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">下载FRP</a>安装包到<code>/usr/local</code>目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd /usr/local<br> wget https://github.com/fatedier/frp/releases/download/v0.60.0/frp_0.60.0_linux_amd64.tar.gz<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>解压</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">解压</span><br>tar -zxf frp_0.60.0_linux_amd64.tar.gz<br><span class="hljs-meta prompt_"># </span><span class="language-bash">改名</span><br>mv frp_0.60.0_linux_amd64 frp<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>修改 frps.toml</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">bindPort</span> = <span class="hljs-string">7000</span><br><span class="hljs-comment">  </span><br><span class="hljs-comment"># 443端口不要变，要不域名后面还要跟端口号，多恶心呐 </span><br><span class="hljs-attr">vhostHTTPSPort</span> = <span class="hljs-string">443</span><br><span class="hljs-attr">auth.token</span>=<span class="hljs-string">&quot;xxxxxx&quot;</span><br><br><span class="hljs-attr">webServer.addr</span>=<span class="hljs-string">&quot;0.0.0.0&quot;</span><br><span class="hljs-attr">webServer.port</span>=<span class="hljs-string">7777</span><br><span class="hljs-attr">webServer.user</span>=<span class="hljs-string">&quot;xxx&quot;</span><br><span class="hljs-attr">webServer.password</span>=<span class="hljs-string">&quot;xxxxxx&quot;</span><br><br><span class="hljs-attr">subdomainHost</span> = <span class="hljs-string">&quot;cgio.asia&quot;</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>创建FRPS开机自启文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs shell">vim /etc/systemd/system/frps.service<br><span class="hljs-meta prompt_">  </span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置内容：</span><br>[Unit]<br><span class="hljs-meta prompt_"> # </span><span class="language-bash">服务名称，可自定义</span><br> Description = frp server<br> After = network.target syslog.target<br> Wants = network.target<br> <br> [Service]<br> Type = simple<br> ExecStart = /usr/local/frp/frps -c /usr/local/frp/frps.toml<br> <br> [Install]<br> WantedBy = multi-user.target<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>开启服务及自启动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">开机自启</span><br>systemctl enable frps<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">开启FRPS服务</span><br>systemctl start frps<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看FRPS状态</span><br>systemctl status frps<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="3-泛域名证书申请"><a href="#3-泛域名证书申请" class="headerlink" title="3. 泛域名证书申请"></a>3. 泛域名证书申请</h2><h3 id="3-1-VPS通过二进制形式安装Lucky，启动服务"><a href="#3-1-VPS通过二进制形式安装Lucky，启动服务" class="headerlink" title="3.1 VPS通过二进制形式安装Lucky，启动服务"></a>3.1 VPS通过二进制形式安装<code>Lucky</code>，启动服务</h3><p><a target="_blank" rel="noopener" href="https://lucky666.cn/docs/install#%E8%87%AA%E5%8A%A8%E8%84%9A%E6%9C%AC%E5%AE%89%E8%A3%85">安装运行&amp;升级备份 | Lucky (lucky666.cn)</a></p>
-<h3 id="3-2-域名证书自动申请设置"><a href="#3-2-域名证书自动申请设置" class="headerlink" title="3.2 域名证书自动申请设置"></a>3.2 域名证书自动申请设置</h3><p>【安全管理】→ 【添加证书】</p>
-<p>按下图的记录添加自己的域名，填写完后，很快就能申请成功！成功后把证书下载下来备用。</p>
-<p><img src="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910022746382.png" srcset="/img/loading.gif" lazyload alt="image-20240910022746382"></p>
-<h3 id="3-3-其它"><a href="#3-3-其它" class="headerlink" title="3.3 其它"></a>3.3 其它</h3><p>可在【Web服务】处，配置反向代理，这里如果使用了443端口，那么<code>frps</code>将无法启动（端口冲突）。如果对服务的安全性要求不高的话，可直接通过这个功能将穿透到当前服务器的内网服务，以反向代理的形式对外发布。</p>
-<p>这个服务需要<code>frpc.toml</code>处配置的服务对应的<code>remotePort</code>！</p>
-<h2 id="4-安装-FRPC"><a href="#4-安装-FRPC" class="headerlink" title="4. 安装 FRPC"></a>4. 安装 FRPC</h2><p>极空间通过Docker下载FRPC镜像备用，并准备一个文件夹存放配置文件及泛域名证书。</p>
-<h3 id="4-1-网络模式使用hosts"><a href="#4-1-网络模式使用hosts" class="headerlink" title="4.1 网络模式使用hosts"></a>4.1 网络模式使用<code>hosts</code></h3><p><img src="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910020557647.png" srcset="/img/loading.gif" lazyload alt="image-20240910020557647"></p>
-<h3 id="4-2-挂载-frpc-toml，以及上一步中下载的泛域名证书"><a href="#4-2-挂载-frpc-toml，以及上一步中下载的泛域名证书" class="headerlink" title="4.2 挂载 frpc.toml，以及上一步中下载的泛域名证书"></a>4.2 挂载 frpc.toml，以及上一步中下载的泛域名证书</h3><p><img src="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910020643749.png" srcset="/img/loading.gif" lazyload alt="image-20240910020643749"></p>
-<h3 id="4-2-配置-frpc-toml"><a href="#4-2-配置-frpc-toml" class="headerlink" title="4.2 配置 frpc.toml"></a>4.2 配置 frpc.toml</h3><figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs toml"><span class="hljs-comment">#这里填写IPV4地址吧，如果是长期域名，也可直接填写域名，一年期的域名还是用IPV4方便</span><br><span class="hljs-attr">serverAddr</span> = <span class="hljs-string">&quot;xxx.xxx.xxx.xxx&quot;</span><br><span class="hljs-comment"># frps.toml中配置的 bindPort值</span><br><span class="hljs-attr">serverPort</span> = <span class="hljs-number">7000</span><br><br><span class="hljs-comment"># 与frps.toml中配置的一致</span><br><span class="hljs-attr">auth.token</span>=<span class="hljs-string">&quot;xxxxxx&quot;</span><br><br><span class="hljs-comment">######### 配置Joplin服务 #########</span><br><span class="hljs-section">[[proxies]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;blog&quot;</span><br><span class="hljs-attr">type</span> = <span class="hljs-string">&quot;https&quot;</span><br><span class="hljs-attr">subdomain</span> = <span class="hljs-string">&quot;blog&quot;</span> <br><br><span class="hljs-section">[proxies.plugin]</span><br><span class="hljs-attr">type</span> = <span class="hljs-string">&quot;https2http&quot;</span><br><span class="hljs-attr">localAddr</span> = <span class="hljs-string">&quot;192.168.0.109:3400&quot;</span><br><span class="hljs-attr">crtPath</span> = <span class="hljs-string">&quot;/etc/frp/server.crt&quot;</span><br><span class="hljs-attr">keyPath</span> = <span class="hljs-string">&quot;/etc/frp/server.key&quot;</span><br><span class="hljs-comment">###############################</span><br><br><span class="hljs-comment">######### 配置Monitor服务 #########</span><br><span class="hljs-section">[[proxies]]</span><br><span class="hljs-attr">name</span> = <span class="hljs-string">&quot;monitor&quot;</span><br><span class="hljs-attr">type</span> = <span class="hljs-string">&quot;https&quot;</span><br><span class="hljs-attr">subdomain</span> = <span class="hljs-string">&quot;monitor&quot;</span> <br><br><span class="hljs-section">[proxies.plugin]</span><br><span class="hljs-attr">type</span> = <span class="hljs-string">&quot;https2http&quot;</span><br><span class="hljs-attr">localAddr</span> = <span class="hljs-string">&quot;192.168.0.109:8006&quot;</span><br><span class="hljs-attr">crtPath</span> = <span class="hljs-string">&quot;/etc/frp/server.crt&quot;</span><br><span class="hljs-attr">keyPath</span> = <span class="hljs-string">&quot;/etc/frp/server.key&quot;</span><br><span class="hljs-comment">################################</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="4-3-启动容器"><a href="#4-3-启动容器" class="headerlink" title="4.3 启动容器"></a>4.3 启动容器</h3><p><img src="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps/image-20240910021020498.png" srcset="/img/loading.gif" lazyload alt="image-20240910021020498"></p>
-<p>搞定！</p>
-<p>接下来，浏览器地址栏输入：</p>
-<p><a target="_blank" rel="noopener" href="https://blog.cgio.asia/">https://blog.cgio.asia</a></p>
-<p><a target="_blank" rel="noopener" href="https://monitor.cgio.asia/">https://monitor.cgio.asia</a></p>
-<p>即可访问内网服务了！</p>
+<h1 id="一、vaultwarden服务搭建"><a href="#一、vaultwarden服务搭建" class="headerlink" title="一、vaultwarden服务搭建"></a>一、vaultwarden服务搭建</h1><h2 id="1-搜索下载-vaultwarden-server-镜像"><a href="#1-搜索下载-vaultwarden-server-镜像" class="headerlink" title="1. 搜索下载 vaultwarden/server 镜像"></a>1. 搜索下载 <code>vaultwarden/server</code> 镜像</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png" srcset="/img/loading.gif" lazyload alt="img.png"></p>
+<h2 id="2-极空间里创建数据目录docker-vaultwarden和容器"><a href="#2-极空间里创建数据目录docker-vaultwarden和容器" class="headerlink" title="2. 极空间里创建数据目录docker/vaultwarden和容器"></a>2. 极空间里创建数据目录<code>docker/vaultwarden</code>和容器</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_1.png" srcset="/img/loading.gif" lazyload alt="img_1.png"></p>
+<h2 id="3-配置网络端口"><a href="#3-配置网络端口" class="headerlink" title="3. 配置网络端口"></a>3. 配置网络端口</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_2.png" srcset="/img/loading.gif" lazyload alt="img_2.png"></p>
+<h2 id="4-确认启动"><a href="#4-确认启动" class="headerlink" title="4. 确认启动"></a>4. 确认启动</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_3.png" srcset="/img/loading.gif" lazyload alt="img_3.png"></p>
+<p>完整shell命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">拉取镜像</span><br>docker pull vaultwarden/server:latest<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">启动容器</span><br>docker run -d --name vaultwarden -v ~/vaultwarden/:/data/ -p 8380:80 vaultwarden/server:latest<br></code></pre></td></tr></table></figure>
+<h1 id="二、配置内网穿透"><a href="#二、配置内网穿透" class="headerlink" title="二、配置内网穿透"></a>二、配置内网穿透</h1><p>容器虽然已启动，但目前还无法通过<code>http://192.168.0.109:8380</code>进行注册和登录，需要先配置一下https，这里使用<code>frp</code>进行内网穿透，这里使用<code>子域名+https</code>的方式进行穿透。</p>
+<p>配置方式可参考<a href="./FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.md">FRP内网服务配置https.</a></p>
+<p>具体配置如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[[proxies]]<br>name = <span class="hljs-string">&quot;valutwarden&quot;</span><br>type = <span class="hljs-string">&quot;https&quot;</span><br>subdomain = <span class="hljs-string">&quot;warden&quot;</span> <br><br><span class="hljs-comment">//localAddr表示vaultwarden服务的链接地址</span><br><span class="hljs-comment">//crtPath 和 keyPath是泛域名证书的路径</span><br>[proxies.<span class="hljs-property">plugin</span>]<br>type = <span class="hljs-string">&quot;https2http&quot;</span><br>localAddr = <span class="hljs-string">&quot;192.168.0.109:8380&quot;</span><br>crtPath = <span class="hljs-string">&quot;/etc/frp/server.crt&quot;</span><br>keyPath = <span class="hljs-string">&quot;/etc/frp/server.key&quot;</span><br></code></pre></td></tr></table></figure>
+<p>配置好后，重启frpc服务，让配置生效。</p>
+<h1 id="三、服务配置"><a href="#三、服务配置" class="headerlink" title="三、服务配置"></a>三、服务配置</h1><p>登录<code>https://warden.cgio.asia</code>（这里的cgio.asia为自己已申请泛域名证书的域名），使用邮箱注册账号并登录。</p>
+<p>这里请记好注册的邮箱和主密码，之后在配置浏览器插件和移动端同步时，都需要用到该账号密码。</p>
+<p>如果之前在谷歌或Edge浏览器中保存了密码，可将其导出来后再导入到vaultwarden中进行管理。</p>
+<h2 id="1-从Edge浏览器中导出保存的密码"><a href="#1-从Edge浏览器中导出保存的密码" class="headerlink" title="1. 从Edge浏览器中导出保存的密码"></a>1. 从Edge浏览器中导出保存的密码</h2><p><code>Edge浏览器 → 设置 → 个人资料 → 密码</code><br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_4.png" srcset="/img/loading.gif" lazyload alt="img_4.png"></p>
+<p>默认情况下，会把这些密码导出到本机用户的<code>文档</code>目录下，名称为<code>Microsoft Edge 密码.csv</code></p>
+<h2 id="2-导出的密码导入到vaultwarden"><a href="#2-导出的密码导入到vaultwarden" class="headerlink" title="2. 导出的密码导入到vaultwarden"></a>2. 导出的密码导入到vaultwarden</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_5.png" srcset="/img/loading.gif" lazyload alt="img_5.png"></p>
+<h2 id="3-分类整理"><a href="#3-分类整理" class="headerlink" title="3. 分类整理"></a>3. 分类整理</h2><p>导入完成后，可在<code>密码库</code>菜单中根据自己需要进行分类整理。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_6.png" srcset="/img/loading.gif" lazyload alt="img_6.png"></p>
+<h1 id="三、客户端配置"><a href="#三、客户端配置" class="headerlink" title="三、客户端配置"></a>三、客户端配置</h1><h2 id="1-配置浏览器插件"><a href="#1-配置浏览器插件" class="headerlink" title="1. 配置浏览器插件"></a>1. 配置浏览器插件</h2><h3 id="1-1-下载浏览器插件"><a href="#1-1-下载浏览器插件" class="headerlink" title="1.1 下载浏览器插件"></a>1.1 下载浏览器插件</h3><p>点击<a target="_blank" rel="noopener" href="https://microsoftedge.microsoft.com/addons/detail/bitwarden-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/jbkfoedolllekgbhcbcoahefnbanhhlh">Bitwarden 密码管理器
+</a>安装对应的浏览器插件。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_7.png" srcset="/img/loading.gif" lazyload alt="img_7.png"></p>
+<h3 id="1-2-登录插件"><a href="#1-2-登录插件" class="headerlink" title="1.2 登录插件"></a>1.2 登录插件</h3><p>使用域名<code>https://waden.cgio.asia</code>以及注册的邮箱+主密码进行登录，登录后的界面功能丰富，自带密码生成器，以后可以使用这个密码生成器为不同网站密码生成更加安全可靠的无规律密码。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_8.png" srcset="/img/loading.gif" lazyload alt="img_8.png"></p>
+<h3 id="1-3-设置自动填充"><a href="#1-3-设置自动填充" class="headerlink" title="1.3 设置自动填充"></a>1.3 设置自动填充</h3><p>在插件的<code>设置</code>菜单里进行自动填充设置，以后当进入到指定网页后，需要登录的话，会进行自动填充的操作，非常方便。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_9.png" srcset="/img/loading.gif" lazyload alt="img_9.png"></p>
+<h2 id="2-移动端使用"><a href="#2-移动端使用" class="headerlink" title="2. 移动端使用"></a>2. 移动端使用</h2><p>移动端的配置方式与浏览器插件配置方式一致，均是使用 <code>域名 + 邮箱 + 主密码</code> 组合的方式进行登录，登陆后自动同步密码。</p>
+<h3 id="2-1-Android端"><a href="#2-1-Android端" class="headerlink" title="2.1 Android端"></a>2.1 Android端</h3><p>Android端有官方版<code>bitwarden</code>和第三方版<code>keyGuard</code>可用，建议使用第三方的<code>keyguard</code>，更好用！</p>
+<h4 id="配置自动填充"><a href="#配置自动填充" class="headerlink" title="配置自动填充"></a>配置自动填充</h4><p>手机设置界面点击最上方的搜索框，输入<code>自动填充</code>，会进入到配置界面，选择<code>keyguard</code>作为首选填充服务<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_10.png" srcset="/img/loading.gif" lazyload alt="img_10.png"></p>
+<h3 id="2-2-iOS-iPad-端"><a href="#2-2-iOS-iPad-端" class="headerlink" title="2.2 iOS | iPad 端"></a>2.2 iOS | iPad 端</h3><p>目前只有官方的<code>bitwarden</code>可用。</p>
 
                 
               </div>
@@ -425,36 +397,17 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BD%91%E7%BB%9C/" class="category-chain-item">网络</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/frp/" class="print-no-link">#frp</a>
-      
-        <a href="/tags/https/" class="print-no-link">#https</a>
-      
         <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="print-no-link">#内网穿透</a>
+      
+        <a href="/tags/NAS/" class="print-no-link">#NAS</a>
+      
+        <a href="/tags/%E6%9E%81%E7%A9%BA%E9%97%B4/" class="print-no-link">#极空间</a>
+      
+        <a href="/tags/vaultwarden/" class="print-no-link">#vaultwarden</a>
       
     </div>
   
@@ -466,8 +419,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>FRP内网服务配置https</div>
-      <div>https://wyd2015.github.io/FRP内网服务配置https.html</div>
+      <div>极空间NAS搭建vaultwarden自托管密码管理中心</div>
+      <div>https://wyd2015.github.io/极空间NAS搭建vaultwarden自托管密码管理中心.html</div>
     </div>
     <div class="license-meta">
       
@@ -479,13 +432,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月10日</div>
+          <div>2024年9月12日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月10日</div>
+          <div>2024年9月12日</div>
         </div>
       
       
@@ -516,18 +469,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.html" title="极空间NAS搭建vaultwarden自托管密码管理中心">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">极空间NAS搭建vaultwarden自托管密码管理中心</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/hexo%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7.html" title="hexo使用技巧">
-                        <span class="hidden-mobile">hexo使用技巧</span>
+                      <a href="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.html" title="FRP内网服务配置https">
+                        <span class="hidden-mobile">FRP内网服务配置https</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
