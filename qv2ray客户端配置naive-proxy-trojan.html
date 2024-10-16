@@ -19,37 +19,36 @@
   <meta name="author" content="静海潜蛟">
   <meta name="keywords" content="">
   
-    <meta name="description" content="需求背景常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站">
+    <meta name="description" content="目前来说，支持Linux&#x2F;windows&#x2F;MacOS多平台的代理客户端可选的有clash、qv2ray等，目前来说，还是qv2ray更全面，支持常见的naiveproxy、trojan、vless、vmess等。 但是，qv2ray客户端的配置略显麻烦，下面简单介绍下相关配置操作。 1、下载 Qv2ray 客户端点击根据平台下载 qv2ray-2.7.0    2、下载 xra">
 <meta property="og:type" content="article">
-<meta property="og:title" content="极空间NAS搭建vaultwarden自托管密码管理中心">
-<meta property="og:url" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.html">
+<meta property="og:title" content="qv2ray客户端配置naive-proxy&#x2F;trojan">
+<meta property="og:url" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan.html">
 <meta property="og:site_name" content="静海潜蛟">
-<meta property="og:description" content="需求背景常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站">
+<meta property="og:description" content="目前来说，支持Linux&#x2F;windows&#x2F;MacOS多平台的代理客户端可选的有clash、qv2ray等，目前来说，还是qv2ray更全面，支持常见的naiveproxy、trojan、vless、vmess等。 但是，qv2ray客户端的配置略显麻烦，下面简单介绍下相关配置操作。 1、下载 Qv2ray 客户端点击根据平台下载 qv2ray-2.7.0    2、下载 xra">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_1.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_2.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_3.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_4.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_5.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_6.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_7.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_8.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_9.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_10.png">
-<meta property="article:published_time" content="2024-09-12T13:06:33.000Z">
-<meta property="article:modified_time" content="2024-09-12T14:15:58.925Z">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016175014273.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016175808201.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016180219271.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016180615245.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016182642270.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016190433348.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016191304710.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016191926918.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016192217718.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016192903020.png">
+<meta property="og:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016194134560.png">
+<meta property="article:published_time" content="2024-10-16T09:36:30.000Z">
+<meta property="article:modified_time" content="2024-10-16T11:46:56.019Z">
 <meta property="article:author" content="静海潜蛟">
-<meta property="article:tag" content="内网穿透">
-<meta property="article:tag" content="NAS">
-<meta property="article:tag" content="极空间">
-<meta property="article:tag" content="vaultwarden">
+<meta property="article:tag" content="qv2ray">
+<meta property="article:tag" content="naiveproxy">
+<meta property="article:tag" content="trojan">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png">
+<meta name="twitter:image" content="https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016175014273.png">
   
   
   
-  <title>极空间NAS搭建vaultwarden自托管密码管理中心 - 静海潜蛟</title>
+  <title>qv2ray客户端配置naive-proxy/trojan - 静海潜蛟</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -258,7 +257,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">极空间NAS搭建vaultwarden自托管密码管理中心</span>
+            <span id="subtitle">qv2ray客户端配置naive-proxy/trojan</span>
           
         </div>
 
@@ -274,8 +273,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-12 21:06" pubdate>
-          2024年9月12日 晚上
+        <time datetime="2024-10-16 17:36" pubdate>
+          2024年10月16日 下午
         </time>
       </span>
     
@@ -286,7 +285,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          996 字
+          759 字
         
       </span>
     
@@ -297,7 +296,7 @@
         
         
         
-          9 分钟
+          7 分钟
         
       </span>
     
@@ -343,12 +342,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">极空间NAS搭建vaultwarden自托管密码管理中心</h1>
+            <h1 id="seo-header">qv2ray客户端配置naive-proxy/trojan</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-09-12T22:15:58+08:00
+                    本文最后更新于 2024-10-16T19:46:56+08:00
                   
                   
 
@@ -358,37 +357,59 @@
             
               <div class="markdown-body">
                 
-                <h1 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h1><p>常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！<br>目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站注册的账号、密码，然后通过不同平台的客户端实现下次登录时自动填充密码。</p>
-<h1 id="搭建准备"><a href="#搭建准备" class="headerlink" title="搭建准备"></a>搭建准备</h1><ul>
-<li>【极空间】或其它支持Docker的服务器</li>
-<li>已申请https证书的域名</li>
+                <p>目前来说，支持Linux&#x2F;windows&#x2F;MacOS多平台的代理客户端可选的有<code>clash</code>、<code>qv2ray</code>等，目前来说，还是qv2ray更全面，支持常见的<code>naiveproxy</code>、<code>trojan</code>、<code>vless</code>、<code>vmess</code>等。 但是，qv2ray客户端的配置略显麻烦，下面简单介绍下相关配置操作。</p>
+<h2 id="1、下载-Qv2ray-客户端"><a href="#1、下载-Qv2ray-客户端" class="headerlink" title="1、下载 Qv2ray 客户端"></a>1、下载 Qv2ray 客户端</h2><p>点击根据平台下载 <a target="_blank" rel="noopener" href="https://github.com/Qv2ray/Qv2ray/releases/tag/v2.7.0">qv2ray-2.7.0</a>  </p>
+<p><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016175014273.png" srcset="/img/loading.gif" lazyload alt="image-20241016175014273"></p>
+<h2 id="2、下载-xray-core"><a href="#2、下载-xray-core" class="headerlink" title="2、下载 xray-core"></a>2、下载 <code>xray-core</code></h2><p><code>xray-core</code>是 qv2ray 代理客户端的核心，必不可少。前几年使用<code>v2ray-core</code>更多一些，但因为GFW的存在，xray-core迎难而上！</p>
+<p>点击根据平台下载 [xray-core v24.9.30](<a target="_blank" rel="noopener" href="https://github.com/XTLS/Xray-core/releases/tag/v24.9.30">Release Xray-core v24.9.30 · XTLS&#x2F;Xray-core (github.com)</a>)，下载界面平台分类较多，根据自己电脑的平台下载对应的<code>Xray-xxxx-xx.zip</code>压缩包即可。</p>
+<p><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016175808201.png" srcset="/img/loading.gif" lazyload alt="image-20241016175808201"></p>
+<h2 id="3、下载-插件"><a href="#3、下载-插件" class="headerlink" title="3、下载 &#96;插件"></a>3、下载 &#96;插件</h2><ul>
+<li><p>[QvPlugin-NaiveProxy](<a target="_blank" rel="noopener" href="https://github.com/Qv2ray/QvPlugin-NaiveProxy">Releases · Qv2ray&#x2F;QvPlugin-NaiveProxy (github.com)</a>)</p>
+</li>
+<li><p>下载界面：<a target="_blank" rel="noopener" href="https://github.com/Qv2ray/QvPlugin-NaiveProxy/releases">Releases · Qv2ray&#x2F;QvPlugin-NaiveProxy (github.com)</a></p>
+</li>
+<li><p><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016180219271.png" srcset="/img/loading.gif" lazyload alt="image-20241016180219271"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/Qv2ray/QvPlugin-Trojan">QvPlugin-Trojan</a></p>
+<ul>
+<li>下载界面：<a target="_blank" rel="noopener" href="https://github.com/Qv2ray/QvPlugin-Trojan/releases/tag/v3.0.0"><a target="_blank" rel="noopener" href="https://github.com/Qv2ray/QvPlugin-Trojan/releases/tag/v3.0.0">Release QvPlugin-Trojan 3.0 · Qv2ray&#x2F;QvPlugin-Trojan (github.com)</a></a></li>
+<li><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016180615245.png" srcset="/img/loading.gif" lazyload alt="image-20241016180615245"></li>
 </ul>
-<h1 id="一、vaultwarden服务搭建"><a href="#一、vaultwarden服务搭建" class="headerlink" title="一、vaultwarden服务搭建"></a>一、vaultwarden服务搭建</h1><h2 id="1-搜索下载-vaultwarden-server-镜像"><a href="#1-搜索下载-vaultwarden-server-镜像" class="headerlink" title="1. 搜索下载 vaultwarden/server 镜像"></a>1. 搜索下载 <code>vaultwarden/server</code> 镜像</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png" srcset="/img/loading.gif" lazyload alt="img.png"></p>
-<h2 id="2-极空间里创建数据目录docker-vaultwarden和容器"><a href="#2-极空间里创建数据目录docker-vaultwarden和容器" class="headerlink" title="2. 极空间里创建数据目录docker/vaultwarden和容器"></a>2. 极空间里创建数据目录<code>docker/vaultwarden</code>和容器</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_1.png" srcset="/img/loading.gif" lazyload alt="img_1.png"></p>
-<h2 id="3-配置网络端口"><a href="#3-配置网络端口" class="headerlink" title="3. 配置网络端口"></a>3. 配置网络端口</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_2.png" srcset="/img/loading.gif" lazyload alt="img_2.png"></p>
-<h2 id="4-确认启动"><a href="#4-确认启动" class="headerlink" title="4. 确认启动"></a>4. 确认启动</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_3.png" srcset="/img/loading.gif" lazyload alt="img_3.png"></p>
-<p>完整shell命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">拉取镜像</span><br>docker pull vaultwarden/server:latest<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">启动容器</span><br>docker run -d --name vaultwarden -v ~/vaultwarden/:/data/ -p 8380:80 vaultwarden/server:latest<br></code></pre></td></tr></table></figure>
-<h1 id="二、配置内网穿透"><a href="#二、配置内网穿透" class="headerlink" title="二、配置内网穿透"></a>二、配置内网穿透</h1><p>容器虽然已启动，但目前还无法通过<code>http://192.168.0.109:8380</code>进行注册和登录，需要先配置一下https，这里使用<code>frp</code>进行内网穿透，这里使用<code>子域名+https</code>的方式进行穿透。</p>
-<p>配置方式可参考<a href="./FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.md">FRP内网服务配置https.</a></p>
-<p>具体配置如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[[proxies]]<br>name = <span class="hljs-string">&quot;valutwarden&quot;</span><br>type = <span class="hljs-string">&quot;https&quot;</span><br>subdomain = <span class="hljs-string">&quot;warden&quot;</span> <br><br><span class="hljs-comment">//localAddr表示vaultwarden服务的链接地址</span><br><span class="hljs-comment">//crtPath 和 keyPath是泛域名证书的路径</span><br>[proxies.<span class="hljs-property">plugin</span>]<br>type = <span class="hljs-string">&quot;https2http&quot;</span><br>localAddr = <span class="hljs-string">&quot;192.168.0.109:8380&quot;</span><br>crtPath = <span class="hljs-string">&quot;/etc/frp/server.crt&quot;</span><br>keyPath = <span class="hljs-string">&quot;/etc/frp/server.key&quot;</span><br></code></pre></td></tr></table></figure>
-<p>配置好后，重启frpc服务，让配置生效。</p>
-<h1 id="三、服务配置"><a href="#三、服务配置" class="headerlink" title="三、服务配置"></a>三、服务配置</h1><p>登录<code>https://warden.cgio.asia</code>（这里的cgio.asia为自己已申请泛域名证书的域名），使用邮箱注册账号并登录。</p>
-<p>这里请记好注册的邮箱和主密码，之后在配置浏览器插件和移动端同步时，都需要用到该账号密码。</p>
-<p>如果之前在谷歌或Edge浏览器中保存了密码，可将其导出来后再导入到vaultwarden中进行管理。</p>
-<h2 id="1-从Edge浏览器中导出保存的密码"><a href="#1-从Edge浏览器中导出保存的密码" class="headerlink" title="1. 从Edge浏览器中导出保存的密码"></a>1. 从Edge浏览器中导出保存的密码</h2><p><code>Edge浏览器 → 设置 → 个人资料 → 密码</code><br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_4.png" srcset="/img/loading.gif" lazyload alt="img_4.png"></p>
-<p>默认情况下，会把这些密码导出到本机用户的<code>文档</code>目录下，名称为<code>Microsoft Edge 密码.csv</code></p>
-<h2 id="2-导出的密码导入到vaultwarden"><a href="#2-导出的密码导入到vaultwarden" class="headerlink" title="2. 导出的密码导入到vaultwarden"></a>2. 导出的密码导入到vaultwarden</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_5.png" srcset="/img/loading.gif" lazyload alt="img_5.png"></p>
-<h2 id="3-分类整理"><a href="#3-分类整理" class="headerlink" title="3. 分类整理"></a>3. 分类整理</h2><p>导入完成后，可在<code>密码库</code>菜单中根据自己需要进行分类整理。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_6.png" srcset="/img/loading.gif" lazyload alt="img_6.png"></p>
-<h1 id="三、客户端配置"><a href="#三、客户端配置" class="headerlink" title="三、客户端配置"></a>三、客户端配置</h1><h2 id="1-配置浏览器插件"><a href="#1-配置浏览器插件" class="headerlink" title="1. 配置浏览器插件"></a>1. 配置浏览器插件</h2><h3 id="1-1-下载浏览器插件"><a href="#1-1-下载浏览器插件" class="headerlink" title="1.1 下载浏览器插件"></a>1.1 下载浏览器插件</h3><p>点击<a target="_blank" rel="noopener" href="https://microsoftedge.microsoft.com/addons/detail/bitwarden-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/jbkfoedolllekgbhcbcoahefnbanhhlh">Bitwarden 密码管理器
-</a>安装对应的浏览器插件。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_7.png" srcset="/img/loading.gif" lazyload alt="img_7.png"></p>
-<h3 id="1-2-登录插件"><a href="#1-2-登录插件" class="headerlink" title="1.2 登录插件"></a>1.2 登录插件</h3><p>使用域名<code>https://waden.cgio.asia</code>以及注册的邮箱+主密码进行登录，登录后的界面功能丰富，自带密码生成器，以后可以使用这个密码生成器为不同网站密码生成更加安全可靠的无规律密码。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_8.png" srcset="/img/loading.gif" lazyload alt="img_8.png"></p>
-<h3 id="1-3-设置自动填充"><a href="#1-3-设置自动填充" class="headerlink" title="1.3 设置自动填充"></a>1.3 设置自动填充</h3><p>在插件的<code>设置</code>菜单里进行自动填充设置，以后当进入到指定网页后，需要登录的话，会进行自动填充的操作，非常方便。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_9.png" srcset="/img/loading.gif" lazyload alt="img_9.png"></p>
-<h2 id="2-移动端使用"><a href="#2-移动端使用" class="headerlink" title="2. 移动端使用"></a>2. 移动端使用</h2><p>移动端的配置方式与浏览器插件配置方式一致，均是使用 <code>域名 + 邮箱 + 主密码</code> 组合的方式进行登录，登陆后自动同步密码。</p>
-<h3 id="2-1-Android端"><a href="#2-1-Android端" class="headerlink" title="2.1 Android端"></a>2.1 Android端</h3><p>Android端有官方版<code>bitwarden</code>和第三方版<code>keyGuard</code>可用，建议使用第三方的<code>keyguard</code>，更好用！</p>
-<h4 id="配置自动填充"><a href="#配置自动填充" class="headerlink" title="配置自动填充"></a>配置自动填充</h4><p>手机设置界面点击最上方的搜索框，输入<code>自动填充</code>，会进入到配置界面，选择<code>keyguard</code>作为首选填充服务<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_10.png" srcset="/img/loading.gif" lazyload alt="img_10.png"></p>
-<h3 id="2-2-iOS-iPad-端"><a href="#2-2-iOS-iPad-端" class="headerlink" title="2.2 iOS | iPad 端"></a>2.2 iOS | iPad 端</h3><p>目前只有官方的<code>bitwarden</code>可用。</p>
+</li>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="4、下载插件对应的可执行文件"><a href="#4、下载插件对应的可执行文件" class="headerlink" title="4、下载插件对应的可执行文件"></a>4、下载插件对应的可执行文件</h2><h3 id="4-1、NaiveProxy"><a href="#4-1、NaiveProxy" class="headerlink" title="4.1、NaiveProxy"></a>4.1、NaiveProxy</h3><p>点击根据平台下载 [NaiveProxy v130.0.6723.40-1](<a target="_blank" rel="noopener" href="https://github.com/klzgrad/naiveproxy/releases/tag/v130.0.6723.40-1">Release v130.0.6723.40-1 · klzgrad&#x2F;naiveproxy (github.com)</a>)</p>
+<h3 id="4-2、Trojan"><a href="#4-2、Trojan" class="headerlink" title="4.2、Trojan"></a>4.2、Trojan</h3><p>点击根据平台下载 [Trojan 1.16.0](<a target="_blank" rel="noopener" href="https://github.com/trojan-gfw/trojan/releases/tag/v1.16.0">Release Trojan 1.16.0 · trojan-gfw&#x2F;trojan (github.com)</a>)</p>
+<p><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016182642270.png" srcset="/img/loading.gif" lazyload alt="image-20241016182642270"></p>
+<h2 id="5、配置客户端"><a href="#5、配置客户端" class="headerlink" title="5、配置客户端"></a>5、配置客户端</h2><p>客户端v2ray可执行文件或插件的位置，可以单独放置，也可找到Qv2ray的安装路径，将解压后的可执行文件&#x2F;插件的文件夹放到该安装路径下，以方便在不同机器间互相拷贝。</p>
+<ol>
+<li><p>打开客户端，选择“首选项[Preference]”，配置V2ray核心可执行文件路径；可使用绝对路径，也可使用相对路径（这里需要将对应的核心文件解压到qv2ray的安装目录下），<br>选择完成后，点击<code>检查V2ray核心设置</code>按钮，弹框展示版本信息，说明配置正确，如果弹出其他异常信息，请检查xray文件是否为电脑对应平台的，其次路径是否正确。<br><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016190433348.png" srcset="/img/loading.gif" lazyload alt="image-20241016190433348"></p>
+</li>
+<li><p>配置插件，插件→打开本地插件目录→选择对应的插件加载。加载完成后在右侧的<code>元数据</code>页签下的路径可看到插件的完整路径。<br><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016191304710.png" srcset="/img/loading.gif" lazyload alt="image-20241016191304710"></p>
+</li>
+<li><p>配置插件的可执行文件，这里以NaiveProxy插件的可执行文件内核路径配置为例，配置成功后，点击<code>Test Run</code>按钮，弹框展示版本信息。其他类型的插件对应的可执行核心文件配置方式类似。<br>   <img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016191926918.png" srcset="/img/loading.gif" lazyload alt="image-20241016191926918"></p>
+</li>
+<li><p>导入可用的NaiveProxy代理配置，或者自己搭建的梯子，使用新建的方式添加。<br><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016192217718.png" srcset="/img/loading.gif" lazyload alt="image-20241016192217718"></p>
+</li>
+</ol>
+<p>​	<img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016192903020.png" srcset="/img/loading.gif" lazyload alt="image-20241016192903020"></p>
+<ol start="5">
+<li>导入或新建成功后，在对应分组里选中该配置，双击启用，然后浏览器打开<code>https://google.com</code>测试效果即可。</li>
+</ol>
+<h2 id="6、Android客户端配置"><a href="#6、Android客户端配置" class="headerlink" title="6、Android客户端配置"></a>6、Android客户端配置</h2><p>Android客户端使用<code>AnXray</code>,它也需要安装对应代理类型的插件配合使用。</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/zeromake/AnXray/releases/tag/v0.4.0-rc06">AnXray.apk</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/klzgrad/naiveproxy/releases/tag/v130.0.6723.40-1">naiveproxy-plugin-v130.0.6723.40-1.apk</a></p>
+<ul>
+<li>这里需要根据自己手机的架构选择对应的安装包下载：<br><img src="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan/image-20241016194134560.png" srcset="/img/loading.gif" lazyload alt="image-20241016194134560"></li>
+</ul>
+</li>
+</ul>
+<p>安装完成后，导入对应的代理配置启用即可。</p>
 
                 
               </div>
@@ -401,13 +422,11 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="print-no-link">#内网穿透</a>
+        <a href="/tags/qv2ray/" class="print-no-link">#qv2ray</a>
       
-        <a href="/tags/NAS/" class="print-no-link">#NAS</a>
+        <a href="/tags/naiveproxy/" class="print-no-link">#naiveproxy</a>
       
-        <a href="/tags/%E6%9E%81%E7%A9%BA%E9%97%B4/" class="print-no-link">#极空间</a>
-      
-        <a href="/tags/vaultwarden/" class="print-no-link">#vaultwarden</a>
+        <a href="/tags/trojan/" class="print-no-link">#trojan</a>
       
     </div>
   
@@ -419,8 +438,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>极空间NAS搭建vaultwarden自托管密码管理中心</div>
-      <div>https://wyd2015.github.io/极空间NAS搭建vaultwarden自托管密码管理中心.html</div>
+      <div>qv2ray客户端配置naive-proxy/trojan</div>
+      <div>https://wyd2015.github.io/qv2ray客户端配置naive-proxy-trojan.html</div>
     </div>
     <div class="license-meta">
       
@@ -432,13 +451,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月12日</div>
+          <div>2024年10月16日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月12日</div>
+          <div>2024年10月16日</div>
         </div>
       
       
@@ -469,18 +488,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83.html" title="Jetbrains IDE配置Docker远程部署环境">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Jetbrains IDE配置Docker远程部署环境</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.html" title="FRP内网服务配置https">
-                        <span class="hidden-mobile">FRP内网服务配置https</span>
+                      <a href="/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83.html" title="Jetbrains IDE配置Docker远程部署环境">
+                        <span class="hidden-mobile">Jetbrains IDE配置Docker远程部署环境</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

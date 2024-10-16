@@ -19,37 +19,26 @@
   <meta name="author" content="静海潜蛟">
   <meta name="keywords" content="">
   
-    <meta name="description" content="需求背景常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站">
+    <meta name="description" content="一、基础环境 win10&#x2F;win11 Ubuntu24或其它远程Linux 点击下载docker-cli工具：docker.exe、 docker-compose.exe  这里之所以使用cli工具进行连接，是因为windows端的Docker-Desktop实在是太占用资源了，不必安装这么一个臃肿的怪物！ 二、配置说明大概步骤如下：    Ubuntu24安装docker并开启远程登录">
 <meta property="og:type" content="article">
-<meta property="og:title" content="极空间NAS搭建vaultwarden自托管密码管理中心">
-<meta property="og:url" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.html">
+<meta property="og:title" content="Jetbrains IDE配置Docker远程部署环境">
+<meta property="og:url" content="https://wyd2015.github.io/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83.html">
 <meta property="og:site_name" content="静海潜蛟">
-<meta property="og:description" content="需求背景常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站">
+<meta property="og:description" content="一、基础环境 win10&#x2F;win11 Ubuntu24或其它远程Linux 点击下载docker-cli工具：docker.exe、 docker-compose.exe  这里之所以使用cli工具进行连接，是因为windows端的Docker-Desktop实在是太占用资源了，不必安装这么一个臃肿的怪物！ 二、配置说明大概步骤如下：    Ubuntu24安装docker并开启远程登录">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_1.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_2.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_3.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_4.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_5.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_6.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_7.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_8.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_9.png">
-<meta property="og:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_10.png">
-<meta property="article:published_time" content="2024-09-12T13:06:33.000Z">
-<meta property="article:modified_time" content="2024-09-12T14:15:58.925Z">
+<meta property="og:image" content="https://wyd2015.github.io/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83/image-20240918204921533-1726663769688-1.png">
+<meta property="og:image" content="https://wyd2015.github.io/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83/image-20240918205225730-1726663950198-3.png">
+<meta property="article:published_time" content="2024-09-18T12:10:05.000Z">
+<meta property="article:modified_time" content="2024-09-18T12:54:18.123Z">
 <meta property="article:author" content="静海潜蛟">
-<meta property="article:tag" content="内网穿透">
-<meta property="article:tag" content="NAS">
-<meta property="article:tag" content="极空间">
-<meta property="article:tag" content="vaultwarden">
+<meta property="article:tag" content="Jetbrains IDE">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png">
+<meta name="twitter:image" content="https://wyd2015.github.io/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83/image-20240918204921533-1726663769688-1.png">
   
   
   
-  <title>极空间NAS搭建vaultwarden自托管密码管理中心 - 静海潜蛟</title>
+  <title>Jetbrains IDE配置Docker远程部署环境 - 静海潜蛟</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -258,7 +247,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">极空间NAS搭建vaultwarden自托管密码管理中心</span>
+            <span id="subtitle">Jetbrains IDE配置Docker远程部署环境</span>
           
         </div>
 
@@ -274,8 +263,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-09-12 21:06" pubdate>
-          2024年9月12日 晚上
+        <time datetime="2024-09-18 20:10" pubdate>
+          2024年9月18日 晚上
         </time>
       </span>
     
@@ -286,7 +275,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          996 字
+          616 字
         
       </span>
     
@@ -297,7 +286,7 @@
         
         
         
-          9 分钟
+          6 分钟
         
       </span>
     
@@ -343,12 +332,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">极空间NAS搭建vaultwarden自托管密码管理中心</h1>
+            <h1 id="seo-header">Jetbrains IDE配置Docker远程部署环境</h1>
             
               <p id="updated-time" class="note note-info" style="display: none">
                 
                   
-                    本文最后更新于 2024-09-12T22:15:58+08:00
+                    本文最后更新于 2024-09-18T20:54:18+08:00
                   
                   
 
@@ -358,37 +347,29 @@
             
               <div class="markdown-body">
                 
-                <h1 id="需求背景"><a href="#需求背景" class="headerlink" title="需求背景"></a>需求背景</h1><p>常在互联网冲浪的人，大都会因为不同需求会在几十甚至上百个网站注册账号，为了方便记忆，总不能都用同一个密码吧，这样太不安全。浏览器虽然自带有密码管理的工具，但有时候使用手机登录时，一时半会想不起来密码，电脑又不在跟前，那叫一个干着急啊！<br>目前有很多商业软件供大众使用，但都需要付费使用，不划算！如果自己有闲置的电脑或服务器资源、NAS等，不妨自己搭建一个密码管理服务，用于记录日常生活中在不同网站注册的账号、密码，然后通过不同平台的客户端实现下次登录时自动填充密码。</p>
-<h1 id="搭建准备"><a href="#搭建准备" class="headerlink" title="搭建准备"></a>搭建准备</h1><ul>
-<li>【极空间】或其它支持Docker的服务器</li>
-<li>已申请https证书的域名</li>
+                <h2 id="一、基础环境"><a href="#一、基础环境" class="headerlink" title="一、基础环境"></a>一、基础环境</h2><ul>
+<li>win10&#x2F;win11</li>
+<li>Ubuntu24或其它远程Linux</li>
+<li>点击下载<code>docker-cli</code>工具：<a target="_blank" rel="noopener" href="https://github.com/docker/cli/tags">docker.exe</a>、 <a target="_blank" rel="noopener" href="https://github.com/docker/compose/releases">docker-compose.exe</a></li>
 </ul>
-<h1 id="一、vaultwarden服务搭建"><a href="#一、vaultwarden服务搭建" class="headerlink" title="一、vaultwarden服务搭建"></a>一、vaultwarden服务搭建</h1><h2 id="1-搜索下载-vaultwarden-server-镜像"><a href="#1-搜索下载-vaultwarden-server-镜像" class="headerlink" title="1. 搜索下载 vaultwarden/server 镜像"></a>1. 搜索下载 <code>vaultwarden/server</code> 镜像</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img.png" srcset="/img/loading.gif" lazyload alt="img.png"></p>
-<h2 id="2-极空间里创建数据目录docker-vaultwarden和容器"><a href="#2-极空间里创建数据目录docker-vaultwarden和容器" class="headerlink" title="2. 极空间里创建数据目录docker/vaultwarden和容器"></a>2. 极空间里创建数据目录<code>docker/vaultwarden</code>和容器</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_1.png" srcset="/img/loading.gif" lazyload alt="img_1.png"></p>
-<h2 id="3-配置网络端口"><a href="#3-配置网络端口" class="headerlink" title="3. 配置网络端口"></a>3. 配置网络端口</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_2.png" srcset="/img/loading.gif" lazyload alt="img_2.png"></p>
-<h2 id="4-确认启动"><a href="#4-确认启动" class="headerlink" title="4. 确认启动"></a>4. 确认启动</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_3.png" srcset="/img/loading.gif" lazyload alt="img_3.png"></p>
-<p>完整shell命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">拉取镜像</span><br>docker pull vaultwarden/server:latest<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">启动容器</span><br>docker run -d --name vaultwarden -v ~/vaultwarden/:/data/ -p 8380:80 vaultwarden/server:latest<br></code></pre></td></tr></table></figure>
-<h1 id="二、配置内网穿透"><a href="#二、配置内网穿透" class="headerlink" title="二、配置内网穿透"></a>二、配置内网穿透</h1><p>容器虽然已启动，但目前还无法通过<code>http://192.168.0.109:8380</code>进行注册和登录，需要先配置一下https，这里使用<code>frp</code>进行内网穿透，这里使用<code>子域名+https</code>的方式进行穿透。</p>
-<p>配置方式可参考<a href="./FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.md">FRP内网服务配置https.</a></p>
-<p>具体配置如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js">[[proxies]]<br>name = <span class="hljs-string">&quot;valutwarden&quot;</span><br>type = <span class="hljs-string">&quot;https&quot;</span><br>subdomain = <span class="hljs-string">&quot;warden&quot;</span> <br><br><span class="hljs-comment">//localAddr表示vaultwarden服务的链接地址</span><br><span class="hljs-comment">//crtPath 和 keyPath是泛域名证书的路径</span><br>[proxies.<span class="hljs-property">plugin</span>]<br>type = <span class="hljs-string">&quot;https2http&quot;</span><br>localAddr = <span class="hljs-string">&quot;192.168.0.109:8380&quot;</span><br>crtPath = <span class="hljs-string">&quot;/etc/frp/server.crt&quot;</span><br>keyPath = <span class="hljs-string">&quot;/etc/frp/server.key&quot;</span><br></code></pre></td></tr></table></figure>
-<p>配置好后，重启frpc服务，让配置生效。</p>
-<h1 id="三、服务配置"><a href="#三、服务配置" class="headerlink" title="三、服务配置"></a>三、服务配置</h1><p>登录<code>https://warden.cgio.asia</code>（这里的cgio.asia为自己已申请泛域名证书的域名），使用邮箱注册账号并登录。</p>
-<p>这里请记好注册的邮箱和主密码，之后在配置浏览器插件和移动端同步时，都需要用到该账号密码。</p>
-<p>如果之前在谷歌或Edge浏览器中保存了密码，可将其导出来后再导入到vaultwarden中进行管理。</p>
-<h2 id="1-从Edge浏览器中导出保存的密码"><a href="#1-从Edge浏览器中导出保存的密码" class="headerlink" title="1. 从Edge浏览器中导出保存的密码"></a>1. 从Edge浏览器中导出保存的密码</h2><p><code>Edge浏览器 → 设置 → 个人资料 → 密码</code><br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_4.png" srcset="/img/loading.gif" lazyload alt="img_4.png"></p>
-<p>默认情况下，会把这些密码导出到本机用户的<code>文档</code>目录下，名称为<code>Microsoft Edge 密码.csv</code></p>
-<h2 id="2-导出的密码导入到vaultwarden"><a href="#2-导出的密码导入到vaultwarden" class="headerlink" title="2. 导出的密码导入到vaultwarden"></a>2. 导出的密码导入到vaultwarden</h2><p><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_5.png" srcset="/img/loading.gif" lazyload alt="img_5.png"></p>
-<h2 id="3-分类整理"><a href="#3-分类整理" class="headerlink" title="3. 分类整理"></a>3. 分类整理</h2><p>导入完成后，可在<code>密码库</code>菜单中根据自己需要进行分类整理。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_6.png" srcset="/img/loading.gif" lazyload alt="img_6.png"></p>
-<h1 id="三、客户端配置"><a href="#三、客户端配置" class="headerlink" title="三、客户端配置"></a>三、客户端配置</h1><h2 id="1-配置浏览器插件"><a href="#1-配置浏览器插件" class="headerlink" title="1. 配置浏览器插件"></a>1. 配置浏览器插件</h2><h3 id="1-1-下载浏览器插件"><a href="#1-1-下载浏览器插件" class="headerlink" title="1.1 下载浏览器插件"></a>1.1 下载浏览器插件</h3><p>点击<a target="_blank" rel="noopener" href="https://microsoftedge.microsoft.com/addons/detail/bitwarden-%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E5%99%A8/jbkfoedolllekgbhcbcoahefnbanhhlh">Bitwarden 密码管理器
-</a>安装对应的浏览器插件。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_7.png" srcset="/img/loading.gif" lazyload alt="img_7.png"></p>
-<h3 id="1-2-登录插件"><a href="#1-2-登录插件" class="headerlink" title="1.2 登录插件"></a>1.2 登录插件</h3><p>使用域名<code>https://waden.cgio.asia</code>以及注册的邮箱+主密码进行登录，登录后的界面功能丰富，自带密码生成器，以后可以使用这个密码生成器为不同网站密码生成更加安全可靠的无规律密码。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_8.png" srcset="/img/loading.gif" lazyload alt="img_8.png"></p>
-<h3 id="1-3-设置自动填充"><a href="#1-3-设置自动填充" class="headerlink" title="1.3 设置自动填充"></a>1.3 设置自动填充</h3><p>在插件的<code>设置</code>菜单里进行自动填充设置，以后当进入到指定网页后，需要登录的话，会进行自动填充的操作，非常方便。<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_9.png" srcset="/img/loading.gif" lazyload alt="img_9.png"></p>
-<h2 id="2-移动端使用"><a href="#2-移动端使用" class="headerlink" title="2. 移动端使用"></a>2. 移动端使用</h2><p>移动端的配置方式与浏览器插件配置方式一致，均是使用 <code>域名 + 邮箱 + 主密码</code> 组合的方式进行登录，登陆后自动同步密码。</p>
-<h3 id="2-1-Android端"><a href="#2-1-Android端" class="headerlink" title="2.1 Android端"></a>2.1 Android端</h3><p>Android端有官方版<code>bitwarden</code>和第三方版<code>keyGuard</code>可用，建议使用第三方的<code>keyguard</code>，更好用！</p>
-<h4 id="配置自动填充"><a href="#配置自动填充" class="headerlink" title="配置自动填充"></a>配置自动填充</h4><p>手机设置界面点击最上方的搜索框，输入<code>自动填充</code>，会进入到配置界面，选择<code>keyguard</code>作为首选填充服务<br><img src="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83/img_10.png" srcset="/img/loading.gif" lazyload alt="img_10.png"></p>
-<h3 id="2-2-iOS-iPad-端"><a href="#2-2-iOS-iPad-端" class="headerlink" title="2.2 iOS | iPad 端"></a>2.2 iOS | iPad 端</h3><p>目前只有官方的<code>bitwarden</code>可用。</p>
+<p>这里之所以使用<code>cli</code>工具进行连接，是因为windows端的Docker-Desktop实在是太占用资源了，不必安装这么一个臃肿的怪物！</p>
+<h2 id="二、配置说明"><a href="#二、配置说明" class="headerlink" title="二、配置说明"></a>二、配置说明</h2><p>大概步骤如下：  </p>
+<ol>
+<li>Ubuntu24安装docker并开启远程登录；</li>
+<li>IDE配置<code>Docker tools</code>（配置windows端的<code>docker.exe</code>【docker-cli】位置）</li>
+<li>IDE配置<code>Docker实例</code>（通过windows端的<code>docker.exe</code>【docker-cli】与远程Docker环境互联）</li>
+</ol>
+<h3 id="2-1、Ubuntu24开启docker远程访问"><a href="#2-1、Ubuntu24开启docker远程访问" class="headerlink" title="2.1、Ubuntu24开启docker远程访问"></a>2.1、Ubuntu24开启docker远程访问</h3><p>Ubuntu24默认情况下，会使用<code>snap</code>配置Docker，个人感觉在此处不太好用，我选择清理由snap安装、管理的docker，改由systemctl去管理。<br>如果之前已经在跑一些镜像了，可以做<code>docker数据迁移</code>，保留原来的容器里完整的运行数据。  </p>
+<p>Ubuntu环境安装这里略过~~~</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">vi /usr/lib/systemd/system/docker.service<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Service下面的Execstat部分添加：-H tcp://0.0.0.0:2375</span><br>[Service]<br>ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375 --containerd=/run/containerd/containerd.sock<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">修改完成后保存</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重载docker守护进程</span><br>systemctl daemon-reload<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">重启docker服务</span><br>systemctl restart docker<br></code></pre></td></tr></table></figure>
+<h4 id="测试是否成功"><a href="#测试是否成功" class="headerlink" title="测试是否成功"></a>测试是否成功</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">curl http://192.168.0.108:2375/version<br></code></pre></td></tr></table></figure>
+<p>返回如下内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;Platform&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Docker Engine - Community&quot;</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;Components&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Engine&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;27.2.0&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;ApiVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.47&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;Arch&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;amd64&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;BuildTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2024-08-27T14:15:15.000000000+00:00&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;Experimental&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;false&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;GitCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3ab5c7d&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;GoVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;go1.21.13&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;KernelVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6.8.0-41-generic&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;MinAPIVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.24&quot;</span><span class="hljs-punctuation">,</span><br>                <span class="hljs-attr">&quot;Os&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;linux&quot;</span><br>            <span class="hljs-punctuation">&#125;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;containerd&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.7.21&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;GitCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;472731909fa34bd7bc9c087e4c27943f9835f111&quot;</span><br>            <span class="hljs-punctuation">&#125;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;runc&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.1.13&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;GitCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;v1.1.13-0-g58aa920&quot;</span><br>            <span class="hljs-punctuation">&#125;</span><br>        <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-punctuation">&#123;</span><br>            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;docker-init&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.19.0&quot;</span><span class="hljs-punctuation">,</span><br>            <span class="hljs-attr">&quot;Details&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>                <span class="hljs-attr">&quot;GitCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;de40ad0&quot;</span><br>            <span class="hljs-punctuation">&#125;</span><br>        <span class="hljs-punctuation">&#125;</span><br>    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;Version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;27.2.0&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;ApiVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.47&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;MinAPIVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.24&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;GitCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3ab5c7d&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;GoVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;go1.21.13&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;Os&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;linux&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;Arch&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;amd64&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;KernelVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6.8.0-41-generic&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;BuildTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2024-08-27T14:15:15.000000000+00:00&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2、IDE配置Docker-Tools"><a href="#2-2、IDE配置Docker-Tools" class="headerlink" title="2.2、IDE配置Docker Tools"></a>2.2、IDE配置Docker Tools</h3><p>下载好的<code>docker.exe</code>和<code>docker-compose.exe</code>解压后找个地方存放，然后开始配置 Docker Tools</p>
+<p><img src="/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83/image-20240918204921533-1726663769688-1.png" srcset="/img/loading.gif" lazyload alt="image-20240918204921533"></p>
+<h3 id="2-3、IDE配置Docker实例"><a href="#2-3、IDE配置Docker实例" class="headerlink" title="2.3、IDE配置Docker实例"></a>2.3、IDE配置Docker实例</h3><p><img src="/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83/image-20240918205225730-1726663950198-3.png" srcset="/img/loading.gif" lazyload alt="image-20240918205225730"></p>
+<p>配置完成，之后就可以结合 <code>Dockerfile</code> 文件部署到远程服务器了！</p>
 
                 
               </div>
@@ -401,13 +382,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="print-no-link">#内网穿透</a>
+        <a href="/tags/Jetbrains-IDE/" class="print-no-link">#Jetbrains IDE</a>
       
-        <a href="/tags/NAS/" class="print-no-link">#NAS</a>
-      
-        <a href="/tags/%E6%9E%81%E7%A9%BA%E9%97%B4/" class="print-no-link">#极空间</a>
-      
-        <a href="/tags/vaultwarden/" class="print-no-link">#vaultwarden</a>
+        <a href="/tags/Docker/" class="print-no-link">#Docker</a>
       
     </div>
   
@@ -419,8 +396,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>极空间NAS搭建vaultwarden自托管密码管理中心</div>
-      <div>https://wyd2015.github.io/极空间NAS搭建vaultwarden自托管密码管理中心.html</div>
+      <div>Jetbrains IDE配置Docker远程部署环境</div>
+      <div>https://wyd2015.github.io/Jetbrains IDE配置Docker远程部署环境.html</div>
     </div>
     <div class="license-meta">
       
@@ -432,13 +409,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年9月12日</div>
+          <div>2024年9月18日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2024年9月12日</div>
+          <div>2024年9月18日</div>
         </div>
       
       
@@ -469,9 +446,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83.html" title="Jetbrains IDE配置Docker远程部署环境">
+                      <a href="/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan.html" title="qv2ray客户端配置naive-proxy/trojan">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Jetbrains IDE配置Docker远程部署环境</span>
+                        <span class="hidden-mobile">qv2ray客户端配置naive-proxy/trojan</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -479,8 +456,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/FRP%E5%86%85%E7%BD%91%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AEhttps.html" title="FRP内网服务配置https">
-                        <span class="hidden-mobile">FRP内网服务配置https</span>
+                      <a href="/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.html" title="极空间NAS搭建vaultwarden自托管密码管理中心">
+                        <span class="hidden-mobile">极空间NAS搭建vaultwarden自托管密码管理中心</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

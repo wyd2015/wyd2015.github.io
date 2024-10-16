@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wyd2015.github.io/qv2ray%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%85%8D%E7%BD%AEnaive-proxy-trojan.html</loc>
+    
+    <lastmod>2024-10-16</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyd2015.github.io/Jetbrains%20IDE%E9%85%8D%E7%BD%AEDocker%E8%BF%9C%E7%A8%8B%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83.html</loc>
+    
+    <lastmod>2024-09-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://wyd2015.github.io/%E6%9E%81%E7%A9%BA%E9%97%B4NAS%E6%90%AD%E5%BB%BAvaultwarden%E8%87%AA%E6%89%98%E7%AE%A1%E5%AF%86%E7%A0%81%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.html</loc>
     
     <lastmod>2024-09-12</lastmod>
@@ -67,7 +85,7 @@
 
   <url>
     <loc>https://wyd2015.github.io/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -75,49 +93,84 @@
   
   <url>
     <loc>https://wyd2015.github.io/tags/frp/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/https/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyd2015.github.io/tags/Jetbrains-IDE/</loc>
+    <lastmod>2024-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyd2015.github.io/tags/Docker/</loc>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/hexo/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyd2015.github.io/tags/qv2ray/</loc>
+    <lastmod>2024-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyd2015.github.io/tags/naiveproxy/</loc>
+    <lastmod>2024-10-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://wyd2015.github.io/tags/trojan/</loc>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/NAS/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/%E6%9E%81%E7%A9%BA%E9%97%B4/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://wyd2015.github.io/tags/vaultwarden/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -126,7 +179,7 @@
   
   <url>
     <loc>https://wyd2015.github.io/categories/%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2024-09-12</lastmod>
+    <lastmod>2024-10-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
